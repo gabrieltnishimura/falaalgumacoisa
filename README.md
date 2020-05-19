@@ -1,6 +1,28 @@
-# falaalgumacoisa
+# Fala Alguma Coisa
 
-A new Flutter project.
+Voice recorder with word suggestions in Portuguese (PT-BR).
+
+# Run
+
+Download dependencies with:
+
+```sh
+flutter pub get
+```
+
+Run the application with:
+
+```sh
+flutter run
+```
+
+# Technical Details
+
+## Configurations
+
+Configurations are provided within Firebase Remote Config.
+
+
 
 ## Getting Started
 
