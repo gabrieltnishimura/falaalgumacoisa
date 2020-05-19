@@ -7,8 +7,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_audio_recorder: '0.5.5' #https://pub.dev/packages/flutter_audio_recorder
   path_provider:
+  http: '0.12.1'
+  flutter_audio_recorder: '0.5.5' #https://pub.dev/packages/flutter_audio_recorder
   assets_audio_player: '1.4.7+4' # https://pub.dev/packages/assets_audio_player
   firebase_core: '0.4.0+9'
   firebase_analytics: '5.0.2'

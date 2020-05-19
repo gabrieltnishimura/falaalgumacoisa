@@ -1,4 +1,5 @@
 import 'package:falaalgumacoisa/widgets/record-widget.dart';
+import 'package:falaalgumacoisa/widgets/upload-widget.dart';
 import 'package:flutter/material.dart';
 
 class RecordPage extends StatelessWidget {
@@ -12,6 +13,7 @@ class RecordPage extends StatelessWidget {
             'Press play to record and stop to stop recording',
           ),
           RecordWidget(),
+          UploadWidget(),
         ],
       ),
     );
