@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 import 'package:path_provider/path_provider.dart';
@@ -46,11 +47,11 @@ class _RecordWidget extends State<RecordWidget> {
   }
 
   void _getConfig() async {
-    print('[CONFIG] empty for now');
-    // final RemoteConfig remoteConfig = await RemoteConfig.instance;
-    // await remoteConfig.fetch(expiration: const Duration(hours: 5));
-    // await remoteConfig.activateFetched();
-    // print('welcome message: ' + remoteConfig.getString('welcome'));
+    print('[CONFIG] trying to get configs');
+    final RemoteConfig remoteConfig = await RemoteConfig.instance;
+    await remoteConfig.fetch(expiration: const Duration(hours: 5));
+    await remoteConfig.activateFetched();
+    print('welcome message: ' + remoteConfig.getString('welcome'));
   }
 
   void _startRecording() async {
