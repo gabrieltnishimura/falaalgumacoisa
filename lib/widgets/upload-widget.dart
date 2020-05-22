@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../service_locator.dart';
+import '../services/remote_config_service.dart';
+
 class UploadWidget extends StatefulWidget {
   @override
   _UploadWidget createState() => _UploadWidget();
 }
 
 class _UploadWidget extends State<UploadWidget> {
+  final RemoteConfigService _configService = locator<RemoteConfigService>();
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -28,16 +32,10 @@ class _UploadWidget extends State<UploadWidget> {
   }
 
   void _uploadRandomFile() async {
-    print('[CONFIG] trying to get configs');
-    final RemoteConfig remoteConfig = await RemoteConfig.instance;
-    await remoteConfig.fetch(expiration: const Duration(hours: 5));
-    await remoteConfig.activateFetched();
-
     final String documentsRoot = await _localPath;
     final String filepath = '$documentsRoot/file.wav';
 
-    await _asyncFileUpload(
-        File(filepath), remoteConfig.getString('DROPBOX_ACCESS_TOKEN'));
+    await _asyncFileUpload(File(filepath), _configService.dropboxAppToken);
   }
 
   _asyncFileUpload(File file, String token) async {

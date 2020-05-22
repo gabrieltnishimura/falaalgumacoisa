@@ -15,43 +15,48 @@ class _RecordWidget extends State<RecordWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        IconButton(
-          onPressed: _startRecording,
-          icon: Icon(Icons.play_arrow),
-          color: Colors.green,
-          iconSize: 40,
-        ),
-        IconButton(
-          onPressed: _stopRecording,
-          icon: Icon(Icons.stop),
-          color: Colors.red,
-          iconSize: 40,
-        ),
-        IconButton(
-          onPressed: _getConfig,
-          icon: Icon(Icons.polymer),
-          color: Colors.yellow,
-          iconSize: 40,
-        ),
-      ],
-    );
+    return Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          IconButton(
+            onPressed: _startRecording,
+            icon: Icon(Icons.mic),
+            color: Colors.grey,
+            iconSize: 200,
+          ),
+        ],
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          IconButton(
+            onPressed: _stopRecording,
+            icon: Icon(Icons.play_arrow),
+            color: Colors.green,
+            iconSize: 40,
+          ),
+          IconButton(
+            onPressed: _stopRecording,
+            icon: Icon(Icons.stop),
+            color: Colors.red,
+            iconSize: 40,
+          ),
+          IconButton(
+            onPressed: _stopRecording,
+            icon: Icon(Icons.restore_from_trash),
+            color: Colors.red,
+            iconSize: 40,
+          ),
+        ],
+      )
+    ]);
   }
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
 
     return directory.path;
-  }
-
-  void _getConfig() async {
-    print('[CONFIG] trying to get configs');
-    final RemoteConfig remoteConfig = await RemoteConfig.instance;
-    await remoteConfig.fetch(expiration: const Duration(hours: 5));
-    await remoteConfig.activateFetched();
-    print('welcome message: ' + remoteConfig.getString('welcome'));
   }
 
   void _startRecording() async {
