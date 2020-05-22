@@ -1,5 +1,6 @@
-import 'package:falaalgumacoisa/widgets/record-widget.dart';
-import 'package:falaalgumacoisa/widgets/upload-widget.dart';
+import 'package:falaalgumacoisa/widgets/record_widget.dart';
+import 'package:falaalgumacoisa/widgets/upload_widget.dart';
+import 'package:falaalgumacoisa/widgets/word_suggestion_widget.dart';
 import 'package:flutter/material.dart';
 
 class RecordPage extends StatelessWidget {
@@ -9,9 +10,7 @@ class RecordPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            'Press play to record and stop to stop recording',
-          ),
+          WordSuggestionWidget(),
           RecordWidget(),
           UploadWidget(),
         ],

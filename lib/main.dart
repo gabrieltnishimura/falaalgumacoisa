@@ -3,7 +3,7 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'service_locator.dart';
 
-import 'wrapper/app-wrapper.dart';
+import 'wrapper/app_wrapper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
