@@ -42,4 +42,6 @@ app.*.map.json
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
+# NEVER COMMIT THESE FILES
 ios/Runner/GoogleService-Info.plist
+assets/config.json
