@@ -10,7 +10,8 @@ dependencies:
   path_provider:
   http: '0.12.1'
   flutter_audio_recorder: '0.5.5' #https://pub.dev/packages/flutter_audio_recorder
-  assets_audio_player: '1.4.7+4' # https://pub.dev/packages/assets_audio_player
+  audioplayer: 0.8.1
+  audioplayer_web: 0.7.1
   firebase_core: '0.4.0+9'
   firebase_analytics: '5.0.2'
   firebase_remote_config: '0.3.0+3'

@@ -40,7 +40,7 @@ class _WordSuggestionWidget extends State<WordSuggestionWidget> {
                 style: TextStyle(fontSize: 40),
                 textAlign: TextAlign.center,
               )
-            : null,
+            : Container(),
         SizedBox(height: 10),
         Center(
             child: Text(
