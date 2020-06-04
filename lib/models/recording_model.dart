@@ -1,4 +1,5 @@
 class RecordingModel {
-  String word;
-  DateTime recorded;
+  final String word;
+  final DateTime recorded;
+  RecordingModel({this.word, this.recorded});
 }
