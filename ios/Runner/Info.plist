@@ -52,5 +52,16 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.899561268796-ifr62ll4cabe7pu1tsk9nk4gh89dfjih</string>
+        </array>
+      </dict>
+    </array>
   </dict>
 </plist>

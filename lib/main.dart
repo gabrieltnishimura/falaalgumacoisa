@@ -1,8 +1,7 @@
-import 'package:falaalgumacoisa/pages/record_page.dart';
+import 'package:falaalgumacoisa/pages/login_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import 'pages/basic_data_page.dart';
 import 'service_locator.dart';
 
 Future<void> main() async {
@@ -17,7 +16,7 @@ class FalaAlgumaCoisaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: BasicDataPage(),
+        home: LoginPage(),
         navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)]);
   }
 }
