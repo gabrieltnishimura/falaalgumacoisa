@@ -67,18 +67,13 @@ class _AppState extends State<App> {
           builder: (BuildContext context, AuthenticationState state) {
             if (state is AuthenticationUninitialized) {
               return SplashPage();
-            }
-            if (state is AuthenticationAuthenticated) {
-              if (userRepository.getModel() == null) {
-                return BasicDataPage(userRepository: userRepository);
-              } else {
-                return RecordPage();
-              }
-            }
-            if (state is AuthenticationUnauthenticated) {
+            } else if (state is AuthenticationAuthenticatedNotRegistered) {
+              return BasicDataPage(userRepository: userRepository);
+            } else if (state is AuthenticationAuthenticatedRegistered) {
+              return RecordPage();
+            } else if (state is AuthenticationUnauthenticated) {
               return LoginPage(userRepository: userRepository);
-            }
-            if (state is AuthenticationLoading) {
+            } else if (state is AuthenticationLoading) {
               return LoadingIndicator();
             }
             return Container();

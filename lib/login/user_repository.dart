@@ -1,42 +1,39 @@
 import 'package:falaalgumacoisa/login/repositories/auth_provider.dart';
-import 'package:falaalgumacoisa/login/repositories/auth_provider_factory.dart';
+import 'package:falaalgumacoisa/login/repositories/google_auth_repository.dart';
 import 'package:falaalgumacoisa/models/user_data_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
-  AuthCredential inMemory;
+  static const TOKEN_KEY = 'FIREBASE_TOKEN_ID_TESTE';
   UserDataModel _currentUser;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<AuthCredential> authenticate({
+  Future<FirebaseUser> authenticate({
     @required AuthProvidersEnum provider,
   }) async {
-    AuthProvider repository = AuthProviderFactory.getAuthProvider(provider);
-    if (repository == null) {
+    AuthCredential credential;
+    if (provider == AuthProvidersEnum.GOOGLE) {
+      credential = await GoogleAuthRepository().getCredentials();
+    }
+    if (credential == null) {
       throw AuthException('internal-repository',
           'Invalid authentication repository (${provider.toString()})');
     }
-    return await repository.authenticate();
+    return (await _auth.signInWithCredential(credential)).user;
   }
 
-  Future<void> deleteToken() async {
-    inMemory = null;
-    return;
-  }
-
-  Future<void> persistToken(AuthCredential credential) async {
-    inMemory = credential;
-    await Future.delayed(Duration(seconds: 1));
-    return;
+  Future<void> signOut() async {
+    return this._auth.signOut();
   }
 
   Future<bool> hasToken() async {
-    /// read from keystore/keychain
-    return inMemory != null;
+    return await this._auth.currentUser() != null;
   }
 
   Future<void> saveModel({UserDataModel user}) async {
+    // move auth data to database?
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('age', user.age);
     await prefs.setString('sex', user.sex);
@@ -51,10 +48,10 @@ class UserRepository {
     }
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getString('age').isEmpty ||
-        prefs.getString('sex').isEmpty ||
-        prefs.getString('origin').isEmpty ||
-        prefs.getString('motherLanguage').isEmpty) {
+    if (!prefs.containsKey('age') ||
+        !prefs.containsKey('sex') ||
+        !prefs.containsKey('origin') ||
+        !prefs.containsKey('motherLanguage')) {
       return null;
     }
 

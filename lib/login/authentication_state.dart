@@ -2,7 +2,9 @@ abstract class AuthenticationState {}
 
 class AuthenticationUninitialized extends AuthenticationState {}
 
-class AuthenticationAuthenticated extends AuthenticationState {}
+class AuthenticationAuthenticatedRegistered extends AuthenticationState {}
+
+class AuthenticationAuthenticatedNotRegistered extends AuthenticationState {}
 
 class AuthenticationUnauthenticated extends AuthenticationState {}
 

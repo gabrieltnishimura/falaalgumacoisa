@@ -28,11 +28,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async* {
     yield LoginLoading();
     try {
-      final AuthCredential credential = await userRepository.authenticate(
+      final FirebaseUser user = await userRepository.authenticate(
         provider: event.provider,
       );
 
-      authenticationBloc.add(LoggedIn(credential: credential));
+      authenticationBloc.add(LoggedIn(user: user));
       yield LoginInitial();
     } catch (error) {
       yield LoginFailure(error: error.toString());

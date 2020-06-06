@@ -9,12 +9,12 @@ class AppStarted extends AuthenticationEvent {
 }
 
 class LoggedIn extends AuthenticationEvent {
-  final AuthCredential credential;
+  final FirebaseUser user;
 
-  LoggedIn({@required this.credential}) : super();
+  LoggedIn({@required this.user}) : super();
 
   @override
-  String toString() => 'LoggedIn { credential: ${credential.toString()} }';
+  String toString() => 'LoggedIn { credential: ${user.toString()} }';
 }
 
 class LoggedOut extends AuthenticationEvent {
