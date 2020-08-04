@@ -1,13 +1,12 @@
+import 'package:falaalgumacoisa/forms/custom_dropdown_widget.dart';
 import 'package:falaalgumacoisa/models/user_data_model.dart';
-import 'package:falaalgumacoisa/pages/record_page.dart';
-import 'package:falaalgumacoisa/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../service_locator.dart';
-import 'custom_dropdown_widget.dart';
-
 class BasicDataForm extends StatefulWidget {
+  final Function saveForm;
+  BasicDataForm({this.saveForm});
+
   @override
   BasicDataFormState createState() {
     return BasicDataFormState();
@@ -15,12 +14,8 @@ class BasicDataForm extends StatefulWidget {
 }
 
 class BasicDataFormState extends State<BasicDataForm> {
-  final UserService _userService = locator<UserService>();
   final _formKey = GlobalKey<FormState>();
   final _user = UserDataModel();
-  final Function callback;
-
-  BasicDataFormState({this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +79,7 @@ class BasicDataFormState extends State<BasicDataForm> {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         print('[BASIC DATA] Saving user\n' + _user.toString());
-                        _userService.save(user: _user).then((value) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RecordPage()),
-                          );
-                        });
+                        widget.saveForm(_user);
                       }
                     },
                     child: Text(

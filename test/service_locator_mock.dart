@@ -6,7 +6,6 @@ import 'package:falaalgumacoisa/services/file_storage_service.dart';
 import 'package:falaalgumacoisa/services/local_file_system_service.dart';
 import 'package:falaalgumacoisa/services/record_service.dart';
 import 'package:falaalgumacoisa/services/remote_config_service.dart';
-import 'package:falaalgumacoisa/services/user_service.dart';
 import 'package:falaalgumacoisa/services/word_suggestion_service.dart';
 import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 import 'package:get_it/get_it.dart';
@@ -22,7 +21,6 @@ Future setupMockLocators() async {
       () => LocalFileSystemServiceMock());
   locator.registerLazySingleton<WordSuggestionService>(
       () => WordSuggestionServiceMock());
-  locator.registerLazySingleton<UserService>(() => UserServiceMock());
   var configService = ConfigServiceMock();
   configService.initialise();
   locator.registerSingleton<ConfigService>(configService);
@@ -61,7 +59,5 @@ class LocalFileSystemServiceMock extends LocalFileSystemService {
 }
 
 class WordSuggestionServiceMock extends WordSuggestionService {}
-
-class UserServiceMock extends UserService {}
 
 class ConfigServiceMock extends ConfigService {}

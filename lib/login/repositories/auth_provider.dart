@@ -1,0 +1,4 @@
+enum AuthProvidersEnum {
+  GOOGLE,
+  FACEBOOK,
+}

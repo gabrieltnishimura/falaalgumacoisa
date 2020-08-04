@@ -8,17 +8,12 @@ class RecordWidget extends StatefulWidget {
 }
 
 class _RecordWidget extends State<RecordWidget> {
-  Widget getButton(BuildContext context, RecordState state) {
-    final recordBloc = BlocProvider.of<RecordBloc>(context);
+  RecordBloc _recordBloc;
 
-    return IconButton(
-      onPressed: () {
-        recordBloc.add(state.nextEvent);
-      },
-      icon: state.icon,
-      color: Colors.grey,
-      iconSize: 200,
-    );
+  @override
+  void initState() {
+    _recordBloc = BlocProvider.of<RecordBloc>(context);
+    super.initState();
   }
 
   @override
@@ -27,9 +22,24 @@ class _RecordWidget extends State<RecordWidget> {
       return Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[getButton(context, state)],
+          children: <Widget>[
+            IconButton(
+              onPressed: () {
+                _recordBloc.add(state.nextEvent);
+              },
+              icon: state.icon,
+              color: Colors.grey,
+              iconSize: 200,
+            ),
+          ],
         ),
       ]);
     });
+  }
+
+  @override
+  void dispose() {
+    _recordBloc.close();
+    super.dispose();
   }
 }
